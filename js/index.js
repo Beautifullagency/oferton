@@ -26,7 +26,7 @@ function renderCategorias(cat) {
     item.appendChild(circle)
     circle.appendChild(itemCategoria)
     circle.appendChild(itemTexto)
-    $('.owl-carousel').owlCarousel('add', item).owlCarousel('update');
+    $('#owl2').owlCarousel('add', item).owlCarousel('update');
   }
 }
 function renderSecciones(cat, nombre ) {
