@@ -1,0 +1,134 @@
+#body {
+  background: #f8f8f8;
+  margin: 0;
+  width: 100%;
+}
+/*FUENTES*/
+.mo-13 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #707070;
+  font-weight: 500;
+}
+.mo-16 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+.mo-18 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: #707070;
+    font-weight: 500;
+}
+.mo-24 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+}
+.mo-32 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+/*HERRAMIENTAS*/
+.text-center {
+    text-align: center;
+}
+.m-0 {
+    margin: 0;
+}
+.color {
+    color: #FF4B54;
+}
+
+@media (max-width: 1024px) {
+    .mo-13 {
+        font-size: 10px;
+      }
+      
+}  
+/*BANNER*/
+#owl1 .owl-dots {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+#owl1.owl-theme .owl-dots .owl-dot.active span, #owl1.owl-theme .owl-dots .owl-dot:hover span {
+    background: #F1D000 !important;
+}
+#owl1.owl-theme .owl-dots .owl-dot span {
+    background: #727272 !important; 
+}
+/*NAVBAR*/
+#owl2.owl-carousel {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    }
+
+.item {
+  width: 100%;
+}
+.circle {
+  position: relative;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.item-text {
+}
+.item-cat {
+  position: relative;
+  width: 50px !important;
+  border-radius: 1000%;
+  box-shadow: 0px 3px 20px #00000029;
+}
+@media (max-width: 1024px) {
+    .item-cat {
+        width: 40px !important;
+      }
+
+}  
+
+/*SECCIONES*/
+.seccion-container {
+    width: 60%;
+    height: 100%;
+    margin: 60px auto 60px auto;
+    background-color: #fff;
+    padding: 30px 105px 30px 105px;
+    border-radius: 8px;
+    box-shadow: 0px 3px 36px #00000029;
+
+}
+.container-inner {
+    width: 100%;
+    height: 100%;
+}
+.row {
+    display: flex;
+    height: 100%;
+
+}
+.col {
+    display: flex;
+    align-items: center;
+    width: 25%;
+    height: 100%;
+}
+ 
+.img-col , .header-section , .footer-section{
+    margin: 10px 10px 10px 10px;
+}
+.url-cat {
+    display: flex;
+    flex-direction: row-reverse;
+    color: #FF4B54;
+    width: calc(100% - 60px);
+   
+    margin: 30px 0px 30px 0px;
+}
