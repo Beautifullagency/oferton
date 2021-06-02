@@ -105,7 +105,7 @@ function renderSecciones(cat, nombre ) {
 /*LLAMADOS AL SERVIDOR*/
 async function renderFetch(params) {
   const categoriasNav = []
-  await fetch('http://demo8759519.mockable.io/api/Empresa/categorias')
+  await fetch('https://demo8759519.mockable.io/api/Empresa/categorias')
     .then(res => res.json())
     .then(res => {
       for (x = 1; x < res.resultado.length + 1; x++) {
