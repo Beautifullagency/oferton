@@ -6,33 +6,42 @@
 /*FUENTES*/
 .mo-13 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
+  font-size: min(2.1vw, 13px);
   color: #707070;
   font-weight: 500;
 }
 .mo-16 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
+    font-size: min(2.1vw, 16px);
     font-weight: 600;
 }
 .mo-18 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
+    font-size: min(2.1vw, 18px);
+    color: #707070;
+    font-weight: 500;
+}
+.mo-20 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: min(2.1vw, 20px);
     color: #707070;
     font-weight: 500;
 }
 .mo-24 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
+    font-size: min(2.1vw, 24px);
     font-weight: 600;
 }
 .mo-32 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 32px;
+    font-size: min(2.1vw, 24px);
     font-weight: 500;
 }
 
 /*HERRAMIENTAS*/
+.bold {
+    font-weight: 700;
+}
 .text-center {
     text-align: center;
 }
@@ -42,7 +51,12 @@
 .color {
     color: #FF4B54;
 }
-
+.hidden {
+    visibility: hidden;
+}
+a , button {
+    cursor: pointer;
+}
 @media (max-width: 1024px) {
     .mo-13 {
         font-size: 10px;
@@ -87,20 +101,23 @@
   border-radius: 1000%;
   box-shadow: 0px 3px 20px #00000029;
 }
-@media (max-width: 1024px) {
-    .item-cat {
-        width: 40px !important;
-      }
-
-}  
+ 
 
 /*SECCIONES*/
 .seccion-container {
     width: 60%;
     height: 100%;
-    margin: 60px auto 60px auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:min(5vw, 60px) ;
+    margin-bottom:min(5vw, 60px) ;
     background-color: #fff;
-    padding: 30px 105px 30px 105px;
+    padding-left: min(9vw, 105px);
+    padding-right: min(9vw, 105px);
+    padding-top:min(5vw, 30px) ;
+    padding-bottom:min(5vw, 30px) ;
+ 
+
     border-radius: 8px;
     box-shadow: 0px 3px 36px #00000029;
 
@@ -120,16 +137,96 @@
     width: 25%;
     height: 100%;
 }
- 
+.img-col {
+    width: 100%;
+}
+
 .img-col , .header-section , .footer-section{
     margin: 10px 10px 10px 10px;
-}
-.url-cat {
+}    
+.footer-section{
     display: flex;
-    flex-direction: row-reverse;
-    color: #FF4B54;
+}
+
+.url-cat {
+    text-align: end;
     width: 90%;
     width: calc(100% - 10px);
-   
-    margin: 30px 0px 30px 0px;
+    margin-left: auto;
+
 }
+/*FOOTER*/
+    .footer {
+        height: 240px;
+        background-color: #EEEEEE;
+        padding: 30px 5% 30px 5%;
+    }
+    .container {
+        max-width: 1024px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .foo-li{
+        margin: 5% auto 5% auto;        
+        cursor: pointer;
+    }
+    .col-foo-1 {
+        width: 25%;
+    }
+    
+    li {
+        list-style: none;
+    }
+    ul {
+        padding: 0;
+    }
+    .foo-logos {
+        width: 100%;
+        background-color: #fff;
+    }
+    .foo-logos img{
+        height: 30px;
+        margin: 0 auto 0 auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .col-5 {
+        width: 20%;
+        text-align: center;
+    }
+/*VIEWS*/
+/*OFERTON*/
+.oferton, .participa, .bases {
+    width: 60%;    
+    margin: 7% auto 7% auto
+}
+.oferton p, .participa p, .bases p{
+   margin: 2% auto 2% auto
+}
+.oferton img{
+    width: 100%;
+}
+.participa .img-1 {
+    width: 100%;
+}
+.participa .img-2 {
+    padding: 20px;
+    border: solid 1px #7272724b;
+    width: 40%;
+}
+.participa button {
+    background-color: #FF4B54;
+    color: #fff;
+    padding: 10px 70px;
+    border-radius: 25px;
+    border: none;
+}
+
+@media (max-width: 1024px) {
+    .item-cat {
+        width: 40px !important;
+      }
+      .img-col {
+          width: 90%;
+      }
+} 
