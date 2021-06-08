@@ -327,7 +327,7 @@ function renderOferton() {
   <p class="mo-18">Te invitamos a conocer este evento digital de promociones comerciales que beneficia el consumo en comercios cordobeses por vía digital, brindando ofertas y descuentos especiales.</p>
   <p class="mo-18"> Lanzamos OFERT-ON con el fin de promover la modernización y actualización permanente del comercio minorista ante las cambiantes exigencias del mercado, las innovaciones tecnológicas y las nuevas tendencias comerciales.</p>
   <p class="mo-18 color bold">Ponemos en marcha OFERT-ON, el primer evento digital de promociones comerciales de la Provincia de Córdoba.</p>
-  <img src="../img/img-que-es-oferton.png" alt="¿Que es oferton?">
+  <img src="./img/img-que-es-oferton.png" alt="¿Que es oferton?">
   <p class="mo-18">Queremos promover la modernización y actualización permanente del comercio minorista, ante las cambiantes exigencias del mercado, las innovaciones tecnológicas, y las nuevas tendencias comerciales. Además buscamos fortalecer la actividad económica y la sostenibilidad del comercio minorista y las PyMEs comerciales y de servicios de la Provincia de Córdoba.</p>
   </div>`
   },300)
@@ -352,7 +352,7 @@ function renderParticipa() {
       <li> 5. Categoría/s en la/s que quiera participar.</li>
   </ul>
   <p class="mo-18 bold"><span class="color">IMPORTANTE:</span> La Secretaría de Comercio no recibirá inscripciones que no vengan a través de las Cámaras Sectoriales que se consignen como “Organizadoras” del evento.</p>
-  <img class="img-1" src="../img/participa.png" alt="¿Que es oferton?">
+  <img class="img-1" src="./img/participa.png" alt="¿Que es oferton?">
   <h2 class="mo-32 color bold">Requisitos para la participación</h2>
       <ul class="mo-18"> 
           <li> 1. Que el comercio esté radicado en la Provincia de Córdoba y su CUIT lo demuestre.</li>
@@ -362,7 +362,7 @@ function renderParticipa() {
       </ul>
   <h2 class="mo-32 color bold">Especificaciones para preparar tu logo</h2>
   <p class="mo-18">Para cargar tu imagen correctamente en el sitio de Ofertón, recordá que debe cumplir con algunas especificaciones. Asegurate de que tu logo se vea completo y con márgenes. Te mostramos un ejemplo:</p>
-  <img class="img-2" src="../img/empresas-logo.svg" alt="Ejemplo de logo">
+  <img class="img-2" src="./img/empresas-logo.svg" alt="Ejemplo de logo">
   <p class="mo-18 color">Peso máx del archivo: 500 kb</p>
   <p class="mo-18">Los tipos de archivos admitidos son . JPG y .PNG</p>
   <h2 class="mo-32 color bold">Inscribite</h2>

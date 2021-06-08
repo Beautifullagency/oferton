@@ -42,8 +42,8 @@ $("#owl1").owlCarousel({
     responsiveClass: true,
     responsive: {
       0: {
-        margin: 10,
-        items: 4,
+        margin: 0,
+        items: 3,
         nav: false,
         dots: false,
       },
