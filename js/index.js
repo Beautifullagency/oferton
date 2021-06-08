@@ -1,17 +1,16 @@
 /*VARIABLES*/
+const historial = []
 /*url de inscripcion de empresas (cuando lo usen) */
 const urlInscripcion = '#home'
 /*url de categorias */
-const URL_CATEGORIAS = ''
-/*url de categorias */
-const URL_CATEGORIA_ID = ''
-
-const historial = []
-
+const URL_CATEGORIAS = 'https://demo8759519.mockable.io/api/Empresa/categorias'
+/*url de categorias sin el query ?idCategoria=${id} */
+const URL_CATEGORIA_ID = `https://0cd09e99-ceda-4479-9523-54082fbea259.mock.pstmn.io/api/Empresa/empresas_x_categoria`
+/*SELECTORES */
 const body = document.querySelector('.body')
 const ul1 = document.querySelector('.footer-cat-1')
 const ul2 = document.querySelector('.footer-cat-2')
-
+/*INICIO*/
 window.location.hash = `#home`
 window.onhashchange = function () {
   if (historial.indexOf(window.location.hash) === -1) {
@@ -19,8 +18,49 @@ window.onhashchange = function () {
   } else {
     historial.pop()
   }
-  console.log(historial)
   renderContenido(historial[historial.length - 1])
+}
+
+/*LLAMADOS AL SERVIDOR*/
+async function categoriasFetch() {
+  const categoriasNav = []
+  await fetch(URL_CATEGORIAS)
+    .then(res => res.json())
+    .then(res => {
+      for (x = 1; x < res.resultado.length + 1; x++) {
+        for (i = 0; i < res.resultado.length; i++) {
+          //console.log(res.resultado[i])
+          if (x === res.resultado[i].id) {
+            categoriasNav.push(res.resultado[i])
+          }
+        }
+      }
+      renderCategorias(categoriasNav)
+    })
+    .catch(err => console.error(err))
+  return categoriasNav
+}
+async function seccionesFetch(id, nombre) {
+  await fetch(`${URL_CATEGORIA_ID}?idCategoria=${id}`)
+    .then(res => res.json())
+    .then(res => {
+      renderSeccionesFull(res, nombre)
+    })
+    .catch(err => console.error(err))
+}
+async function seccionesFetchAll(cat) {
+  for (let i = 0; i < cat.length; i++) {
+    const id = cat[i].id
+    const nombre = cat[i].nombre
+    await fetch(`${URL_CATEGORIA_ID}?idCategoria=${id}`)
+      .then(res => res.json())
+      .then(res => {
+
+        renderSecciones(res, nombre)
+
+      })
+      .catch(err => console.error(err))
+  }
 }
 
 /*FUNCIONES*/
@@ -30,7 +70,7 @@ async function renderContenido(hash) {
   ul2.innerHTML = ''
   const cat = await categoriasFetch()
   if (hash !== '#que-es-oferton' && hash !== '#participa'
-      && hash !== '#bases-y-condiciones'&& hash !== '#promociones-bancarias') {
+    && hash !== '#bases-y-condiciones' && hash !== '#promociones-bancarias') {
     /*QUITA EL HASH*/
     const data1 = hash.split('#')
     const data = data1[1].split('&')
@@ -41,22 +81,22 @@ async function renderContenido(hash) {
     if (name === 'home' || name === '') {
       seccionesFetchAll(cat)
     } else {
-      seccionesFetch(id, name, false)
+      seccionesFetch(id, name)
     }
   } else {
     switch (hash) {
       case '#que-es-oferton':
         renderOferton()
-          console.log('#que-es-oferton')
+        console.log('#que-es-oferton')
         break;
       case '#participa':
         renderParticipa()
-      console.log('#participa')
+        console.log('#participa')
         break;
       case '#bases-y-condiciones':
         renderBases()
         break;
-        case '#promociones-bancarias':
+      case '#promociones-bancarias':
         console.log('promociones-bancarias')
         break;
 
@@ -66,6 +106,7 @@ async function renderContenido(hash) {
   }
 
 }
+
 /*HEADER Y FOOTER */
 function renderCategorias(cat) {
   for (i = 0; i < cat.length; i++) {
@@ -115,9 +156,9 @@ function renderCategorias(cat) {
     }
   }
 }
+
 /*BODY HOME */
 function renderSecciones(cat, nombre) {
-  console.log(cat)
   /*CREA ELEMENTOS*/
   const seccionContainer = document.createElement("div")
   const header = document.createElement("div")
@@ -154,40 +195,54 @@ function renderSecciones(cat, nombre) {
   //console.log(cat)
   /*SEPARA EN DOS COLUMNAS LOS LOGOS*/
   for (i = 0; i < 4; i++) {
+    const categories = cat[i]
+    const urlEmpresa = categories.url
+    const bufferName = categories.logo.fileName
+    const bufferType = categories.logo.mediaType
+    const bufferImg = categories.logo.buffer
     /*CREA ELEMENTOS*/
     const col = document.createElement("col")
     const img = document.createElement("img")
+    const a = document.createElement("a")
     /*AGREGA PROPIEDADES*/
     col.className = 'col'
     img.className = 'img-col'
-    img.src = `./img/logo-venex.png`
+    img.src = `data:image/${bufferType};base64,${bufferImg}`
+    img.alt = bufferName
+    a.href = urlEmpresa
+    a.className = 'url-empresa'
+    a.target = "_blank"
 
     row1.appendChild(col)
-    col.appendChild(img)
-
-    const categories = cat[i]
-    //console.log(categories.logo)
-    //const bufferImg = categories.logo
+    col.appendChild(a)
+    a.appendChild(img)
   }
   for (i = 4; i < 8; i++) {
+    const categories = cat[i]
+    const urlEmpresa = categories.url
+    const bufferName = categories.logo.fileName
+    const bufferType = categories.logo.mediaType
+    const bufferImg = categories.logo.buffer
     const col = document.createElement("col")
     const img = document.createElement("img")
+    const a = document.createElement("a")
     /*AGREGA PROPIEDADES*/
     col.className = 'col'
     img.className = 'img-col'
-    img.src = `./img/logo-venex.png`
-
-    row2.appendChild(col)
-    col.appendChild(img)
-
-    const categories = cat[i]
-    //console.log(categories.logo)
-    //const bufferImg = categories.logo
+    img.src = `data:image/${bufferType};base64,${bufferImg}`
+    img.alt = bufferName
+    a.href = urlEmpresa
+    a.className = 'url-empresa'
+    a.target = "_blank"
+    row1.appendChild(col)
+    col.appendChild(a)
+    a.appendChild(img)
   }
 }
+
 /*BODY SECCION */
 function renderSeccionesFull(cat, nombre) {
-  console.log('renderSeccionesFull')
+  //console.log(cat)
   /*CREA ELEMENTOS*/
   const seccionContainer = document.createElement("div")
   const header = document.createElement("div")
@@ -205,7 +260,6 @@ function renderSeccionesFull(cat, nombre) {
   row2.className = 'row-2 row'
   header.className = 'header-section'
   footer.className = 'footer-section'
-
   /*APENDA ELEMENTOS A LA SECCION */
   body.appendChild(seccionContainer)
   seccionContainer.appendChild(header)
@@ -215,75 +269,30 @@ function renderSeccionesFull(cat, nombre) {
   containerInner.appendChild(row1)
   containerInner.appendChild(row2)
   /*SEPAR LOGOS*/
+  for (i = 0; i < cat.length; i++) {
+    const categories = cat[i]
+    const urlEmpresa = categories.url
+    const bufferName = categories.logo.fileName
+    const bufferType = categories.logo.mediaType
+    const bufferImg = categories.logo.buffer
+    /*CREA ELEMENTOS*/
+    const col = document.createElement("col")
+    const img = document.createElement("img")
+    const a = document.createElement("a")
+    /*AGREGA PROPIEDADES*/
+    col.className = 'col'
+    img.className = 'img-col'
+    img.src = `data:image/${bufferType};base64,${bufferImg}`
+    img.alt = bufferName
+    a.href = urlEmpresa
+    a.className = 'url-empresa'
+    a.target = "_blank"
 
-  /*CREA ELEMENTOS*/
-  const col = document.createElement("col")
-  const img = document.createElement("img")
-  /*AGREGA PROPIEDADES*/
-  col.className = 'col'
-  img.className = 'img-col'
-  img.src = `./img/logo-venex.png`
-
-  row1.appendChild(col)
-  col.appendChild(img)
-
-  const categories = cat[i]
-  //console.log(categories.logo)
-  //const bufferImg = categories.logo
-
-}
-/*LLAMADOS AL SERVIDOR*/
-async function categoriasFetch(params) {
-  const categoriasNav = []
-  await fetch('https://demo8759519.mockable.io/api/Empresa/categorias')
-    .then(res => res.json())
-    .then(res => {
-      for (x = 1; x < res.resultado.length + 1; x++) {
-        for (i = 0; i < res.resultado.length; i++) {
-          //console.log(res.resultado[i])
-          if (x === res.resultado[i].id) {
-            categoriasNav.push(res.resultado[i])
-          }
-        }
-      }
-      renderCategorias(categoriasNav)
-    })
-    .catch(err => console.error(err))
-  return categoriasNav
-}
-async function seccionesFetch(id, nombre, estado) {
-  await fetch(`https://0cd09e99-ceda-4479-9523-54082fbea259.mock.pstmn.io/api/Empresa/empresas_x_categoria?idCategoria=${id}`)
-    .then(res => res.json())
-    .then(res => {
-      if (estado) {
-        renderSecciones(res, nombre)
-      } else {
-        renderSeccionesFull(res, nombre)
-      }
-    })
-    .catch(err => console.error(err))
-
-}
-async function seccionesFetchAll(cat) {
-
-  for (let i = 0; i < cat.length; i++) {
-    const id = cat[i].id
-    const nombre = cat[i].nombre
-    await fetch(`https://0cd09e99-ceda-4479-9523-54082fbea259.mock.pstmn.io/api/Empresa/empresas_x_categoria?idCategoria=${id}`)
-      .then(res => res.json())
-      .then(res => {
-        renderSecciones(res, nombre)
-
-      })
-      .catch(err => console.error(err))
-
-
+    row1.appendChild(col)
+    col.appendChild(a)
+    a.appendChild(img)
   }
-
-
 }
-
-
 
 /*FUNCIONES PARA ARRAYS*/
 const removerAcentos = (str) => {
@@ -306,6 +315,7 @@ const scrollUp = () => {
     scrollTop: '250px'
   }, 500);
 }
+
 /*FUNCIONES CLICK*/
 function seccionesFull() {
   scrollUp()
@@ -313,15 +323,16 @@ function seccionesFull() {
   cadena = removerComas(cadena)
   window.location.hash = `${cadena}&${this.dataset.id}`
 }
+
 /*FUNCIONES DE VISTAS ESTATICAS */
 function renderOferton() {
   scrollUp()
   const title = document.querySelector('.title')
   const body = document.querySelector('.body')
   title.innerHTML = ''
-  body.innerHTML = ''   
-  setTimeout(()=>{
-      body.innerHTML = `
+  body.innerHTML = ''
+  setTimeout(() => {
+    body.innerHTML = `
   <div class="oferton text-center">
       <h1 class="mo-32 color bold">¿Qué es OFERT-ÓN?</h1>
   <p class="mo-18">Te invitamos a conocer este evento digital de promociones comerciales que beneficia el consumo en comercios cordobeses por vía digital, brindando ofertas y descuentos especiales.</p>
@@ -330,8 +341,8 @@ function renderOferton() {
   <img src="./img/img-que-es-oferton.png" alt="¿Que es oferton?">
   <p class="mo-18">Queremos promover la modernización y actualización permanente del comercio minorista, ante las cambiantes exigencias del mercado, las innovaciones tecnológicas, y las nuevas tendencias comerciales. Además buscamos fortalecer la actividad económica y la sostenibilidad del comercio minorista y las PyMEs comerciales y de servicios de la Provincia de Córdoba.</p>
   </div>`
-  },300)
-  
+  }, 300)
+
 }
 function renderParticipa() {
   scrollUp()
@@ -339,8 +350,8 @@ function renderParticipa() {
   const body = document.querySelector('.body')
   title.innerHTML = ''
   body.innerHTML = ''
-  setTimeout(()=>{
-      body.innerHTML = `
+  setTimeout(() => {
+    body.innerHTML = `
   <div class="participa text-center">
       <h1 class="mo-32 color bold">Cómo participar con tu marca de OFERT-ON</h1>
   <p class="mo-18">La inscripción de los Participantes se hará a través de las Cámaras Sectoriales o Asociaciones Civiles representantes de los sectores comerciales que integran las categorías de participación. Las Cámaras serán las responsables de recolectar y gestionar la información entregada por las empresas que quieran ingresar a OFERT-ON y consignar con ellas la siguiente información:</p>
@@ -371,9 +382,9 @@ function renderParticipa() {
 
 
   </div>`
-  
-  },300)
-  
+
+  }, 300)
+
 }
 function renderBases() {
   scrollUp()
@@ -381,8 +392,8 @@ function renderBases() {
   const body = document.querySelector('.body')
   title.innerHTML = ''
   body.innerHTML = ''
-  setTimeout(()=>{
-      body.innerHTML = `
+  setTimeout(() => {
+    body.innerHTML = `
   <div class="bases text-center">
       <h1 class="mo-32 color bold">Bases y condiciones OFERT-ON 2021</h1>
       <p class="mo-18">La Secretaría de Comercio, dependiente del Ministerio de Industria, Comercio y Minería, pone a su disposición los presentes Términos y Condiciones que describen los derechos y responsabilidades de los Participantes en el uso de las herramientas actuales o a crearse en el futuro que dicha Secretaría ponga a disposición de los Usuarios, y que denominaremos “los Servicios”, en el marco de la acción promocional <span class="bold">OFERT-ON.</span></p>
@@ -422,31 +433,31 @@ function renderBases() {
 
   </div>`
 
-  let categorias = document.querySelector('#categorias')
-  const categoriasNav = []
-  fetch('https://demo8759519.mockable.io/api/Empresa/categorias')
-    .then(res => res.json())
-    .then(res => {
-      for (x = 1; x < res.resultado.length + 1; x++) {
-        for (i = 0; i < res.resultado.length; i++) {
-          //console.log(res.resultado[i])
-          if (x === res.resultado[i].id) {
-            categoriasNav.push(res.resultado[i])
+    let categorias = document.querySelector('#categorias')
+    const categoriasNav = []
+    fetch('https://demo8759519.mockable.io/api/Empresa/categorias')
+      .then(res => res.json())
+      .then(res => {
+        for (x = 1; x < res.resultado.length + 1; x++) {
+          for (i = 0; i < res.resultado.length; i++) {
+            //console.log(res.resultado[i])
+            if (x === res.resultado[i].id) {
+              categoriasNav.push(res.resultado[i])
+            }
           }
         }
-      }
-      for (i = 0; i < categoriasNav.length; i++) {
+        for (i = 0; i < categoriasNav.length; i++) {
           const li = document.createElement('li')
           let nombre = categoriasNav[i].nombre
-          li.textContent =  ` ● ${nombre.toLowerCase()}`
+          li.textContent = ` ● ${nombre.toLowerCase()}`
           categorias.appendChild(li)
-      
-      }
 
-    })
-    .catch(err => console.error(err))
-  return categoriasNav
-  
-  },300)
-  
+        }
+
+      })
+      .catch(err => console.error(err))
+    return categoriasNav
+
+  }, 300)
+
 }
