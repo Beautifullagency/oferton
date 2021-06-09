@@ -110,7 +110,13 @@ display: flex;
 }
 .nav-col {
   width: 33%;
-  position: relative;
+  position: relative; 
+}
+.nav-categoria-1 , .nav-categoria-2{
+  padding-right: 10px;
+}
+.nav-li {
+  margin: 10px 0 10px 0;
 }
 .navbar-inner {
   background: #fff;
@@ -214,7 +220,7 @@ display: flex;
   height: 100%;
 }
 .img-col {
-  width: 100%;
+  width: 95%;
 }
 
 .img-col,

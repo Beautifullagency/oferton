@@ -619,25 +619,35 @@ function renderCategorias(cat) {
     $('#owl2').owlCarousel('add', item).owlCarousel('update');
     /*FOOTER */
     const anchor2 = document.createElement("a")
+    const anchor3 = document.createElement("a")
     const ul1 = document.querySelector('.footer-cat-1')
     const ul2 = document.querySelector('.footer-cat-2')
 
     const li = document.createElement("li")
+    const liNav = document.createElement("li")
+    liNav.className = 'nav-li mo-13'
     li.className = 'foo-li mo-13'
     anchor2.className = 'mo-13'
     anchor2.textContent = `${cat[i].nombre}`
     anchor2.dataset.id = `${cat[i].id}`
     anchor2.dataset.name = `${removerAcentos(cat[i].nombre)}`
     anchor2.onclick = seccionesFull
+    anchor3.className = 'mo-13'
+    anchor3.textContent = `${cat[i].nombre}`
+    anchor3.dataset.id = `${cat[i].id}`
+    anchor3.dataset.name = `${removerAcentos(cat[i].nombre)}`
+    anchor3.onclick = seccionesFull
     /*EN DOS COLUMNAS */
     if (i < Math.round(cat.length / 2)) {
       ul1.appendChild(li)
-      ulNav1.appendChild(li)
+      ulNav1.appendChild(liNav)
+      liNav.appendChild(anchor3)
       li.appendChild(anchor2)
       
     } else {
       ul2.appendChild(li)
-      ulNav2.appendChild(li)
+      ulNav2.appendChild(liNav)
+      liNav.appendChild(anchor3)
       li.appendChild(anchor2)
     }
     
