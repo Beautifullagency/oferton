@@ -125,11 +125,11 @@ display: flex;
 
 
 .owl1Img {
-  height: 380px ;
+  height: 360px ;
 }
 @media (max-width: 425px) {
   .owl1Img {
-    height: 300px ;
+    height: 290px ;
   }
   .navbar-col-1 img {
     margin: auto 10px;

@@ -991,7 +991,7 @@ if (window.matchMedia("(max-width: 435px)").matches) {
     navBtn.style.visibility = 'hidden'
     navBtn.style.width = '0px'
     navBtn.style.margin = '0px' 
-    navInner.style.width = '100%'
+    navInner.style.width = '95%'
     
     navInner.style.heith = '100%'
     navInner.style.visibility = 'visible'
@@ -1009,7 +1009,7 @@ navBtn.addEventListener('click', ()=>{
   navBtn.style.visibility = 'hidden'
   navBtn.style.width = '0px'
   navBtn.style.margin = '0px' 
-  navInner.style.width = '70%'
+  navInner.style.width = '80%'
   navInner.style.visibility = 'visible'
   
 })
